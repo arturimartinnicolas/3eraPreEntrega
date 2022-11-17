@@ -1,0 +1,85 @@
+<nav class="navbar text-bg-dark text-white mt-2">
+  <div class="container-fluid">
+    <div class="col-12">
+      <span appHeader20>Lista de inscripciones</span>
+    </div>
+  </div>
+</nav>
+<div class="row">
+  <div class="col-6">
+  <div class="col-2 mt-2" style="align-content: flex-start">
+    <div class="d-flex justify-content-center w-100 mb-3">
+      <button mat-raised-button (click)="openDialog()" color="primary">
+        Agregar inscripcion
+      </button>
+    </div>
+  </div>
+</div>
+<div class="row">
+  <div class="col-md-12">
+    <mat-table
+      [dataSource]="dataSource"
+      matSort
+      class="mat-elevation-z8 listaInscripciones"
+    >
+      <ng-container matColumnDef="cursoId">
+        <mat-header-cell *matHeaderCellDef mat-sort-header
+          >Curso Id</mat-header-cell
+        >
+        <mat-cell *matCellDef="let inscripcion">
+          {{ inscripcion.cursoId }}
+        </mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="cursoNombre">
+        <mat-header-cell *matHeaderCellDef mat-sort-header
+          >Nombre Curso</mat-header-cell
+        >
+        <mat-cell *matCellDef="let inscripcion">
+          {{ inscripcion.cursoNombre | titlecase }}
+        </mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="alumnoId">
+        <mat-header-cell *matHeaderCellDef mat-sort-header
+          >Alumno Id</mat-header-cell
+        >
+        <mat-cell *matCellDef="let inscripcion">
+          {{ inscripcion.alumnoId }}
+        </mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="alumnoNombre">
+        <mat-header-cell *matHeaderCellDef mat-sort-header
+          >Nombre Alumno</mat-header-cell
+        >
+        <mat-cell *matCellDef="let inscripcion">
+          {{ inscripcion.alumnoNombre | titlecase }}
+        </mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="acciones">
+        <mat-header-cell *matHeaderCellDef>Acciones</mat-header-cell>
+        <mat-cell *matCellDef="let inscripcion">
+          <mat-icon
+            class="cursor-pointer"
+            color="primary"
+            matTooltip="Editar"
+            (click)="editar(inscripcion.id)"
+            >edit</mat-icon
+          >
+          <mat-icon
+            class="cursor-pointer"
+            color="primary"
+            matTooltip="Borrar"
+            (click)="borrar(inscripcion.id)"
+            >delete</mat-icon
+          >
+        </mat-cell>
+      </ng-container>
+
+      <mat-header-row *matHeaderRowDef="columnas"></mat-header-row>
+      <mat-row *matRowDef="let row; columns: columnas"></mat-row>
+    </mat-table>
+  </div>
+</div>
